@@ -3,7 +3,7 @@ import { Drawer } from "./Drawer.js";
 class BinDrawer extends Drawer {
   constructor() {
     super();
-    this.defaultWidth = 80;
+    this.defaultWidth = 50;
   }
 
   draw(artWorks, sorted, scale) {

@@ -16,7 +16,7 @@
   <section class="menu--section">
     {% include radio-item.html id="sorter--color--enable" name="sorter-type" value="color" label="Organização Cromática" checked="checked" %}
     <div class="menu--section--description">Organização por cores dominantes</div>
-    <div class="menu--section--items disabled" id="sorter--color--items">
+    <div class="menu--section--items" id="sorter--color--items">
       <div class="menu--section--item">
         <div class="menu--section--item--title">Selecione uma cor</div>
         <input type="color" value="#000000" class="sorter--color-picker" id="color--sorter--color-picker">
@@ -68,9 +68,9 @@
   </section>
 
   <div class="menu--title">Exportar</div>
+  <div class="menu--description">Gere imagens a partir das obras selecionadas</div>
 
-  <section class="menu--section">
-    <div class="menu--section--description">Gere imagens a partir das obras selecionadas</div>
+  <section class="menu--section export--section">
     <div class="menu--section--items disabled" id="export--grid--items">
       <div class="checkbox--item" id="export--grid--button"><label>Grid</label></div>
     </div>

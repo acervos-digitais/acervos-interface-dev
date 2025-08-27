@@ -8,7 +8,10 @@
 
   <div class="canvas--intro desktop" id="canvas--intro">
     {% for item in page.canvas.intro %}
-    <p><h3><b>{{ item[0] }}</b></h3>{{ item[1] }}</p><br>
+    {% capture justify %}
+      {% cycle "left", "right", "right" %}
+    {% endcapture %}
+    <div class="canvas--intro--paragraph {{ justify }}"><h3><b>{{ item[0] }}</b></h3>{{ item[1] }}</div><br>
     {% endfor %}
   </div>
 

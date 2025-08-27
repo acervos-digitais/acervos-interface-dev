@@ -44,8 +44,8 @@
   }
   
   .menu--section {
-    margin: 12px 0 0;
-    padding-top: 12px;
+    margin: 0;
+    padding: 12px 0;
     border-top: 1px solid var(--bg-color-hl);
 
     .menu--section--title {
@@ -58,7 +58,34 @@
 
     .checkbox--item,
     .radio--item {
+      display: flex;
       margin: 8px 0;
+
+      input {
+        width: 0;
+        cursor: pointer;
+      }
+
+      label {
+        font-size: 0.95rem;
+        padding: 4px 6px;
+        background-color: #ddd;
+        user-select: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--bg-color-l);
+        }
+
+        &.disabled {
+          opacity: 50%;
+          pointer-events: none;
+        }
+      }
+
+      input:checked + label {
+        background-color: var(--bg-color-hl);
+      }
     }
 
     .range--item {
@@ -133,6 +160,19 @@
       text-decoration: underline;
       cursor: pointer;
     }
+
+    &.counter--section {
+      position: sticky;
+      top: -20px;
+      background-color: var(--bg-color);
+    }
+
+    &.export--section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
   }
 
   .menu--section + .menu--title {
@@ -165,39 +205,6 @@
 .sorter-menu {
   .menu--about--button {
     display: none;
-  }
-}
-
-.menu--section {
-  .checkbox--item,
-  .radio--item {
-    display: flex;
-
-    input {
-      width: 0;
-      cursor: pointer;
-    }
-
-    label {
-      font-size: 0.95rem;
-      padding: 4px 6px;
-      background-color: #ddd;
-      user-select: none;
-      cursor: pointer;
-
-      &:hover {
-        background-color: var(--bg-color-l);
-      }
-
-      &.disabled {
-        opacity: 50%;
-        pointer-events: none;
-      }
-    }
-
-    input:checked + label {
-      background-color: var(--bg-color-hl);
-    }
   }
 }
 

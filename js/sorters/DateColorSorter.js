@@ -8,9 +8,17 @@ class DateColorSorter extends Sorter {
 
     this.picker = document.getElementById("dateXcolor--sorter--color-picker");
 
-    this.picker.addEventListener("change", () => {
+    this.dispatchTimeout = null;
+    const dispatchColor = () => {
       this.color = ColorSorter.hexToRgb(this.picker.value);
       document.dispatchEvent(this.sortDataEvent);
+    };
+
+    this.picker.addEventListener("input", () => {
+      if (this.dispatchTimeout !== null) {
+        clearTimeout(this.dispatchTimeout);
+      }
+      this.dispatchTimeout = setTimeout(dispatchColor, 100);
     });
 
     this.color = ColorSorter.hexToRgb(this.picker.value);

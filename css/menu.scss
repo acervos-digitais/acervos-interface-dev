@@ -19,16 +19,14 @@
 
   .menu--close--button {
     position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1.75rem;
-    height: 1.75rem;
+    position: sticky;
+    top: -20px;
+    width: 1.6rem;
+    height: 1.6rem;
     padding: 0;
-    margin: 0;
+    margin: -20px 0 -6px;
     border: 0;
-    background-color: rgba(0,0,0,0);
+    background-color: var(--bg-color);
     cursor: pointer;
     transition: transform 0.15s linear;
 
@@ -147,12 +145,13 @@
     width: 1.75rem;
     height: 1.75rem;
     padding: 0;
-    padding-top: 1.75rem;
     overflow: hidden;
     border: 1px var(--txt-color) solid;
 
     .menu--close--button {
       transform: rotate(180deg);
+      margin: 0;
+      top: 0;
     }
   }
 

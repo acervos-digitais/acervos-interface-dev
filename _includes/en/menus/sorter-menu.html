@@ -5,20 +5,20 @@
   <button class="menu--about--button" id="menu--about--button"></button>
 
   <div class="menu--title">Visualizations</div>
-  <div class="menu--description">Escolha abaixo como visualizar o conteúdo selecionado</div>
+  <div class="menu--description">How to display the selected content</div>
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--date--enable" name="sorter-type" value="date" label="Timeline" %}
-    <div class="menu--section--description">Organização por ano de criação.</div>
+    <div class="menu--section--description">By year of creation</div>
     <div class="menu--section--items disabled" id="sorter--date--items"></div>
   </section>
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--color--enable" name="sorter-type" value="color" label="Chromatic Ordering" checked="checked" %}
-    <div class="menu--section--description">Organização por cores dominantes.</div>
+    <div class="menu--section--description">By dominant colors</div>
     <div class="menu--section--items disabled" id="sorter--color--items">
       <div class="menu--section--item">
-        <div class="menu--section--item--title">Selecione uma cor</div>
+        <div class="menu--section--item--title">Select a color</div>
         <input type="color" value="#000000" class="sorter--color-picker" id="color--sorter--color-picker">
       </div>
     </div>
@@ -26,10 +26,10 @@
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--cluster--enable" name="sorter-type" value="cluster" label="AI Clustering" %}
-    <div class="menu--section--description">Organização por sub-categorias sugeridas por IA</div>
+    <div class="menu--section--description">By clustering</div>
     <div class="menu--section--items disabled" id="sorter--cluster--items">
       <div class="menu--section--item">
-        <div class="menu--section--item--title">Selecione uma curadoria</div>
+        <div class="menu--section--item--title">Select cluster</div>
         <select class="sorter--dropdown" id="cluster--sorter--cluster-picker"></select>
       </div>
     </div>
@@ -37,16 +37,16 @@
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--latent--enable" name="sorter-type" value="latent" label="Latent Space" %}
-    <div class="menu--section--description">Mapa de afinidade visual/semântica calculada por IA.</div>
+    <div class="menu--section--description">Visual/Semantic affinities calculated by AI model</div>
     <div class="menu--section--items disabled" id="sorter--latent--items"></div>
   </section>
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--dateXcolor--enable" name="sorter-type" value="dateXcolor" label="Chromatic Timeline" %}
-    <div class="menu--section--description">Organização por cores e ano.</div>
+    <div class="menu--section--description">Organize by color and year</div>
     <div class="menu--section--items disabled" id="sorter--dateXcolor--items">
       <div class="menu--section--item">
-        <div class="menu--section--item--title">Selecione uma cor</div>
+        <div class="menu--section--item--title">Choose a color</div>
         <input type="color" value="#000000" class="sorter--color-picker" id="dateXcolor--sorter--color-picker">
       </div>
     </div>
@@ -54,14 +54,14 @@
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--clusterXcluster--enable" name="sorter-type" value="clusterXcluster" label="Cluster / Cluster" %}
-    <div class="menu--section--description">Visualização 2D de características variadas.</div>
+    <div class="menu--section--description">2D visualizations of clusters</div>
     <div class="menu--section--items disabled" id="sorter--clusterXcluster--items">
       <div class="menu--section--item">
-        <label for="x-dim">Escolha um vetor:</label>
+        <label for="x-dim">Choose a cluster:</label>
         <select name="x-dim" id="clusterXcluster--sorter--x-picker"></select>
       </div>
       <div class="menu--section--item">
-        <label for="y-dim">Escolha outro vetor:</label>
+        <label for="y-dim">Choose another cluster:</label>
         <select name="y-dim" id="clusterXcluster--sorter--y-picker"></select>
       </div>
     </div>

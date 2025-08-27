@@ -7,6 +7,6 @@
 
   .menu--close--button {
     z-index: 35;
-    right: 0;
+    margin-left: calc(100% + 24px - 1.75rem);
   }
 }

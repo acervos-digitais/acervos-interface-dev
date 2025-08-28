@@ -5,6 +5,7 @@ class Filter {
     this.itemsEl = document.getElementById(`filter--${slug}--items`);
 
     this.data = data;
+    this.slug = slug;
     this.inputs = [];
     this.evtOpt = { detail: { fromDate: false } };
     this.filterDataEvent = new CustomEvent("filter-data", this.evtOpt);
@@ -47,8 +48,8 @@ class Filter {
   addAllNone() {
     this.addSpacer();
 
-    this.createInputNoListener("checkbox", "all--checkbox", "all", "Todos");
-    this.createInputNoListener("checkbox", "none--checkbox", "none", "Nenhum");
+    this.createInputNoListener("checkbox", `all--${this.slug}--checkbox`, "all", "Todos");
+    this.createInputNoListener("checkbox", `none--${this.slug}--checkbox`, "none", "Nenhum");
 
     const noneInput = this.inputs.pop();
     const allInput = this.inputs.pop();

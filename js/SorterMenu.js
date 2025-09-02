@@ -33,21 +33,13 @@ class SorterMenu {
     this.checked = menuEl.querySelector("input[name='sorter-type']:checked")?.value ?? null;
 
     const allRadio = menuEl.querySelectorAll("input[name='sorter-type']");
-    const allColor = menuEl.querySelectorAll("input[type='color']");
     allRadio.forEach(el => el.addEventListener("change", (evt) => {
       if (this.checked) {
-        document.getElementById(`sorter--${this.checked}--items`)?.classList.add("disabled");
+        document.getElementById(`sorter--${this.checked}--items`)?.classList.add("hidden");
       }
 
       this.checked = evt.target.value;
-      document.getElementById(`sorter--${this.checked}--items`)?.classList.remove("disabled");
-
-      allColor.forEach(el => {
-        el.classList.add("hidden");
-        if (el.id.split("--")[0] == this.checked) {
-          el.classList.remove("hidden");
-        }
-      });
+      document.getElementById(`sorter--${this.checked}--items`)?.classList.remove("hidden");
 
       document.dispatchEvent(this.sortDataEvent);
     }));

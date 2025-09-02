@@ -10,7 +10,7 @@
   <section class="menu--section">
     {% include radio-item.html id="sorter--date--enable" name="sorter-type" value="date" label="Linha do Tempo" %}
     <div class="menu--section--description">Organização por ano de criação</div>
-    <div class="menu--section--items disabled" id="sorter--date--items"></div>
+    <div class="menu--section--items hidden" id="sorter--date--items"></div>
   </section>
 
   <section class="menu--section">
@@ -27,7 +27,7 @@
   <section class="menu--section">
     {% include radio-item.html id="sorter--cluster--enable" name="sorter-type" value="cluster" label="Curadoria" %}
     <div class="menu--section--description">Organização por categorias sugeridas por IA</div>
-    <div class="menu--section--items disabled" id="sorter--cluster--items">
+    <div class="menu--section--items hidden" id="sorter--cluster--items">
       <div class="menu--section--item">
         <div class="menu--section--item--title">Selecione uma categoria</div>
         <select class="sorter--dropdown" id="cluster--sorter--cluster-picker"></select>
@@ -38,13 +38,13 @@
   <section class="menu--section">
     {% include radio-item.html id="sorter--latent--enable" name="sorter-type" value="latent" label="Espaço Latente" %}
     <div class="menu--section--description">Mapa de afinidade visual/semântica calculada por IA</div>
-    <div class="menu--section--items disabled" id="sorter--latent--items"></div>
+    <div class="menu--section--items hidden" id="sorter--latent--items"></div>
   </section>
 
   <section class="menu--section">
     {% include radio-item.html id="sorter--dateXcolor--enable" name="sorter-type" value="dateXcolor" label="Linha do Tempo Cromática" %}
     <div class="menu--section--description">Organização por cores e ano</div>
-    <div class="menu--section--items disabled" id="sorter--dateXcolor--items">
+    <div class="menu--section--items hidden" id="sorter--dateXcolor--items">
       <div class="menu--section--item">
         <div class="menu--section--item--title">Selecione uma cor</div>
         <input type="color" value="#000000" class="sorter--color-picker" id="dateXcolor--sorter--color-picker">
@@ -55,7 +55,7 @@
   <section class="menu--section">
     {% include radio-item.html id="sorter--clusterXcluster--enable" name="sorter-type" value="clusterXcluster" label="Cluster / Cluster" %}
     <div class="menu--section--description">Visualização 2D de categorias</div>
-    <div class="menu--section--items disabled" id="sorter--clusterXcluster--items">
+    <div class="menu--section--items hidden" id="sorter--clusterXcluster--items">
       <div class="menu--section--item">
         <label for="x-dim">Escolha uma categoria:</label>
         <select name="x-dim" id="clusterXcluster--sorter--x-picker"></select>

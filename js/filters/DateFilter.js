@@ -12,16 +12,11 @@ class DateFilter extends Filter {
 
   setupRangeInput(slug, value) {
     const rangeEl = document.getElementById(`${slug}--input`);
-    const valueEl = document.getElementById(`${slug}--value`);
 
     rangeEl.min = this.data.min;
     rangeEl.max = this.data.maxAll;
     rangeEl.value = value;
 
-    valueEl.innerHTML = `${rangeEl.value}`;
-
-    rangeEl.addEventListener("mousemove", () => valueEl.innerHTML = rangeEl.value);
-    rangeEl.addEventListener("change", () => valueEl.innerHTML = rangeEl.value);
     rangeEl.addEventListener("change", () => document.dispatchEvent(this.filterDataEvent));
 
     return rangeEl;

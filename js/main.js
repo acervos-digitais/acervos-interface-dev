@@ -75,5 +75,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // start
-  mSorters.validIdsSet = mFilters.filter(allIdsSet);
+  const isMobile = getComputedStyle(document.getElementById("canvas--mobile--intro")).getPropertyValue("display") != "none";
+  if (!isMobile) {
+    document.dispatchEvent(new CustomEvent("filter-data"));
+  }
 });

@@ -1,21 +1,7 @@
 <div class="canvas--container contract" id="canvas--container">
-
-  {% if include.lang %}
-  {% include {{ include.lang | append: "/menus/other-menu.html" }} %}
-  {% endif %}
-
   <div class="canvas--drawing" id="canvas--drawing"></div>
 
-  <div class="canvas--intro desktop" id="canvas--intro">
-    {% for item in page.canvas.intro %}
-    {% capture justify %}
-      {% cycle "left", "right", "right" %}
-    {% endcapture %}
-    <div class="canvas--intro--paragraph {{ justify }}"><h3><b>{{ item[0] }}</b></h3>{{ item[1] }}</div><br>
-    {% endfor %}
-  </div>
-
-  <div class="canvas--intro mobile">
-    <p><h3><b>{{ page.canvas.mobile }}</b></h3></p>
+  <div class="canvas--intro mobile" id="canvas--mobile--intro">
+    <h3><b>{{ page.canvas.mobile }}</b></h3>
   </div>
 </div>

@@ -84,10 +84,6 @@ class Canvas {
   draw(checked) {
     this.checked = checked;
     if (checked in this.allDrawers) {
-      if (this.sorted.length > 0) {
-        document.getElementById("canvas--intro").classList.add("hidden");
-      }
-
       this.allDrawers[checked].draw(this.allArtWorks, this.sorted, this.scale);
     }
   }

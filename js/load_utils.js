@@ -16,10 +16,10 @@ const OBJ_THOLDS = {
   "palm tree": 0,
   "human face": 0,
   "human hand": 0,
-  "naked human back": 0,
-  "naked human breast": 0,
-  "naked human buttocks": 0,
-  "naked human torso": 0,
+  "naked human back": 1,
+  "naked human breast": 1,
+  "naked human buttocks": 1,
+  "naked human torso": 1,
 };
 
 async function fetchData(mUrl) {

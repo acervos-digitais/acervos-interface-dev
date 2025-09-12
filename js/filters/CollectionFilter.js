@@ -8,8 +8,6 @@ class CollectionFilter extends Filter {
       const labelSlug = col.replaceAll(" ", "-").toLowerCase();
       this.createInput("checkbox", `${labelSlug}--checkbox`, col, col);
     }
-
-    this.addAllNone();
   }
 
   filter(inIdsSet) {

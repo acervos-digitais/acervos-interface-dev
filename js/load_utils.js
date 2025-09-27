@@ -83,7 +83,14 @@ function createMenuData(metaData, clusterData) {
 
   const nowYear = new Date().getFullYear();
 
-  Object.entries(metaData).forEach(([id, v]) => metaData[id].year = Math.min(v.year, nowYear + 1));
+  // Original years:
+  // Object.entries(metaData).forEach(([id, v]) => metaData[id].year = Math.min(v.year, nowYear + 1));
+
+  // Only imputed years:
+  // Object.entries(metaData).forEach(([id, v]) => metaData[id].year = (v.yearp[1] > 0.1 && v.yearp[1] < 1.0) ? v.yearp[0] : nowYear+1);
+
+  // Original + Imputed
+  Object.entries(metaData).forEach(([id, v]) => metaData[id].year = Math.min(v.yearp[0], nowYear + 1));
 
   const idsYears = Object.values(metaData).map(x => [x.id, x.year]);
   const allYears = idsYears.map(x => x[1]);

@@ -6,7 +6,7 @@ class XyDrawer extends Drawer {
     this.defaultWidth = 20;
   }
 
-  draw(artWorks, sorted, scale) {
+  draw(artWorks, sorted, zoomLevel) {
     this.arts = [];
     this.drawingEl.innerHTML = "";
 
@@ -14,11 +14,12 @@ class XyDrawer extends Drawer {
     this.drawingEl.classList.add("xy");
 
     const canvasH = this.drawingEl.offsetHeight;
+    const zoomScale = this.scaleFromLevel(zoomLevel);
 
     for (const { id, x, y } of sorted) {
       this.resetEl(artWorks[id]);
 
-      const w = scale * this.defaultWidth;
+      const w = zoomScale * this.defaultWidth;
       const h = (w / parseFloat(artWorks[id].dataset.ratio));
 
       const ypx = Math.min(y * canvasH, canvasH - h);
@@ -35,7 +36,7 @@ class XyDrawer extends Drawer {
     }
   }
 
-  zoom(scale) {
+  zoom(zoomLevel) {
     // TODO: zoom xy canvas
   }
 }

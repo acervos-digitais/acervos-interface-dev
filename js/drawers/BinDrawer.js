@@ -6,7 +6,7 @@ class BinDrawer extends Drawer {
     this.defaultWidth = 50;
   }
 
-  draw(artWorks, sorted, scale) {
+  draw(artWorks, sorted, zoomLevel) {
     this.arts = [];
     this.years = [];
     this.drawingEl.innerHTML = "";
@@ -14,13 +14,15 @@ class BinDrawer extends Drawer {
     this.drawingEl.classList = ["canvas--drawing"];
     this.drawingEl.classList.add("bin");
 
+    const zoomScale = this.scaleFromLevel(zoomLevel);
+
     let prevYear = 0;
 
     for (const yearId of sorted) {
       const yearInfoEl = document.createElement("div");
       yearInfoEl.classList.add("year-info");
       yearInfoEl.innerHTML = yearId.year;
-      yearInfoEl.style.fontSize = `${1 * scale}rem`;
+      yearInfoEl.style.fontSize = `${1 * zoomScale}rem`;
 
       if (yearId.year % 5 == 0 || yearId.year - prevYear > 1) {
         yearInfoEl.style.opacity = "1";
@@ -36,7 +38,7 @@ class BinDrawer extends Drawer {
         this.resetEl(artWorks[id]);
 
         artWorks[id].style.aspectRatio = `${artWorks[id].dataset.ratio}`;
-        artWorks[id].style.width = `${this.defaultWidth * scale}px`;
+        artWorks[id].style.width = `${this.defaultWidth * zoomScale}px`;
 
         yearContainerEl.appendChild(artWorks[id]);
         this.arts.push(artWorks[id]);
@@ -47,9 +49,10 @@ class BinDrawer extends Drawer {
     window.scrollTo(0, document.body.scrollHeight);
   }
 
-  zoom(scale) {
-    this.arts.forEach(el => el.style.width = `${this.defaultWidth * scale}px`);
-    this.years.forEach(el => el.style.fontSize = `${1 * scale}rem`);
+  zoom(zoomLevel) {
+    const zoomScale = this.scaleFromLevel(zoomLevel);
+    this.arts.forEach(el => el.style.width = `${this.defaultWidth * zoomScale}px`);
+    this.years.forEach(el => el.style.fontSize = `${1 * zoomScale}rem`);
   }
 }
 

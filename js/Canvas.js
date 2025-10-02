@@ -30,7 +30,7 @@ class ArtWork {
 class Canvas {
   constructor(metaData) {
     this.sorted = [];
-    this.scale = 1;
+    this.zoomLevel = 0;
     this.checked = null;
 
     const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -70,13 +70,12 @@ class Canvas {
       if (!evt.shiftKey) return;
 
       evt.preventDefault();
-      this.scale += evt.deltaY > 0 ? -0.01 : 0.01;
-
-      if (this.scale < 0.1) this.scale = 0.1;
-      if (this.scale > 24) this.scale = 24;
+      this.zoomLevel += evt.deltaY > 0 ? -0.1 : 0.1;
+      if (this.zoomLevel < -16) this.zoomLevel = -16;
+      if (this.zoomLevel > 16) this.zoomLevel = 16;
 
       if (this.checked in this.allDrawers) {
-        this.allDrawers[this.checked].zoom(this.scale);
+        this.allDrawers[this.checked].zoom(this.zoomLevel);
       }
     });
   }
@@ -84,7 +83,7 @@ class Canvas {
   draw(checked) {
     this.checked = checked;
     if (checked in this.allDrawers) {
-      this.allDrawers[checked].draw(this.allArtWorks, this.sorted, this.scale);
+      this.allDrawers[checked].draw(this.allArtWorks, this.sorted, this.zoomLevel);
     }
   }
 }

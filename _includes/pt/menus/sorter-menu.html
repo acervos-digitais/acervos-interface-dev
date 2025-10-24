@@ -10,7 +10,9 @@
   <section class="menu--section">
     {% include radio-item.html id="sorter--date--enable" name="sorter-type" value="date" label="Linha do Tempo" %}
     <div class="menu--section--description">Organização por ano de criação</div>
-    <div class="menu--section--items hidden" id="sorter--date--items"></div>
+    <div class="menu--section--items hidden" id="sorter--date--items">
+      {% include number-item.html label="Intervalo" slug="date--sorter--interval" %}
+    </div>
   </section>
 
   <section class="menu--section">
@@ -48,6 +50,7 @@
       <div class="menu--section--item">
         <div class="menu--section--item--title">Selecione uma cor</div>
         <input type="color" value="#000000" class="sorter--color-picker" id="dateXcolor--sorter--color-picker">
+        {% include number-item.html label="Intervalo" slug="dateXcolor--sorter--interval" %}
       </div>
     </div>
   </section>

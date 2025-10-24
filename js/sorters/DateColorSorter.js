@@ -6,31 +6,42 @@ class DateColorSorter extends Sorter {
   constructor(data) {
     super(data, "dateXcolor");
 
-    this.picker = document.getElementById("dateXcolor--sorter--color-picker");
+    this.pickers = {
+      color: document.getElementById("dateXcolor--sorter--color-picker"),
+      interval: document.getElementById("dateXcolor--sorter--interval--input"),
+    };
 
     this.dispatchTimeout = null;
     const dispatchColor = () => {
-      this.color = ColorSorter.hexToRgb(this.picker.value);
+      this.color = ColorSorter.hexToRgb(this.pickers.color.value);
       document.dispatchEvent(this.sortDataEvent);
     };
 
-    this.picker.addEventListener("input", () => {
+    this.pickers.color.addEventListener("input", () => {
       if (this.dispatchTimeout !== null) {
         clearTimeout(this.dispatchTimeout);
       }
       this.dispatchTimeout = setTimeout(dispatchColor, 100);
     });
 
-    this.color = ColorSorter.hexToRgb(this.picker.value);
+    this.color = ColorSorter.hexToRgb(this.pickers.color.value);
+
+    this.pickers.interval.value = 1;
+    this.pickers.interval.addEventListener("change", () => {
+      this.interval = this.pickers.interval.value;
+      document.dispatchEvent(this.sortDataEvent);
+    });
+    this.interval = this.pickers.interval.value;
   }
 
   sort(validIdsSet) {
     if (!this.enableEl.checked) return;
 
-    const byYear = DateSorter.sortByYear(validIdsSet, this.data);
+    const byYear = DateSorter.sortByYear(validIdsSet, this.data, this.interval);
 
-    return byYear.map(({ year, ids }) => ({
-      year,
+    return byYear.map(({ yearIdx, yearLabel, ids }) => ({
+      yearIdx,
+      yearLabel,
       ids: ColorSorter.sortIdColors(ids, this.data, this.color).map(x => x.id)
     }));
   }

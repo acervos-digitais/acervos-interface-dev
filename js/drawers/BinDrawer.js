@@ -19,15 +19,16 @@ class BinDrawer extends Drawer {
     let prevYear = 0;
 
     for (const yearId of sorted) {
+      const firstYear = yearId.yearLabel[0];
       const yearInfoEl = document.createElement("div");
       yearInfoEl.classList.add("year-info");
-      yearInfoEl.innerHTML = yearId.year;
+      yearInfoEl.innerHTML = firstYear;
       yearInfoEl.style.fontSize = `${1 * zoomScale}rem`;
 
-      if (yearId.year % 5 == 0 || yearId.year - prevYear > 1) {
+      if (firstYear % 5 == 0 || firstYear - prevYear > 1) {
         yearInfoEl.style.opacity = "1";
       }
-      prevYear = yearId.year;
+      prevYear = firstYear;
 
       const yearContainerEl = document.createElement("div");
       yearContainerEl.classList.add("year-container");

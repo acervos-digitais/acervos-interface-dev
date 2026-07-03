@@ -12,9 +12,9 @@ class Client {
   static async predict(endpoint, obj) {
     const url = `${Client.callUrl}${endpoint}`;
     const postResponse = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         data: [ obj.idBoxes_in ]
@@ -26,7 +26,7 @@ class Client {
     const eventResponse = await fetch(`${url}/${postResult.event_id}`);
     const eventResultText = await eventResponse.text();
 
-    const dataMatch = eventResultText.match(/data:\s*(.+)/);
+    const dataMatch = eventResultText.match(/event: complete\ndata:\s*(.+)/);
     const dataJsonString = `{"data": ${dataMatch[1]}}`;
 
     const result = JSON.parse(dataJsonString);

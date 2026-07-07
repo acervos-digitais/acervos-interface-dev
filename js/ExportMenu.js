@@ -46,11 +46,11 @@ class ExportMenu {
 
     const gridButton = document.getElementById("export--grid--button");
     const objectsButton = document.getElementById("export--objects--button");
-    const xyButton = document.getElementById("export--xy--button");
+    const compositionButton = document.getElementById("export--composition--button");
 
     gridButton?.addEventListener("click", () => this.createImage("/grid"));
     objectsButton.addEventListener("click", () => this.createImage("/objects"));
-    xyButton.addEventListener("click", () => this.createImage("/xy"));
+    compositionButton.addEventListener("click", () => this.createImage("/composition"));
   }
 
   update(sorted, objects) {
@@ -59,7 +59,7 @@ class ExportMenu {
 
     const gridItemsEl = document.getElementById("export--grid--items");
     const objectsItemsEl = document.getElementById("export--objects--items");
-    const xyItemsEl = document.getElementById("export--xy--items");
+    const compositionItemsEl = document.getElementById("export--composition--items");
 
     if (this.sorted.length > 0) {
       gridItemsEl?.classList.remove("disabled");
@@ -69,10 +69,10 @@ class ExportMenu {
 
     if (this.sorted.length > 0 && this.objects.length > 0) {
       objectsItemsEl.classList.remove("disabled");
-      xyItemsEl.classList.remove("disabled");
+      compositionItemsEl.classList.remove("disabled");
     } else {
       objectsItemsEl.classList.add("disabled");
-      xyItemsEl.classList.add("disabled");
+      compositionItemsEl.classList.add("disabled");
     }
   }
 

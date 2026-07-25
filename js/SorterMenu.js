@@ -6,7 +6,7 @@ import { DateColorSorter } from "./sorters/DateColorSorter.js";
 import { LatentSorter } from "./sorters/LatentSorter.js";
 
 class SorterMenu {
-  constructor(metaData, menuData) {
+  constructor(metaData, clusterLabels) {
     this.checked = null;
     this.validIdsSet = new Set();
     this.sortDataEvent = new CustomEvent("sort-data");
@@ -14,10 +14,10 @@ class SorterMenu {
     this.allSorters = {
       date: new DateSorter(metaData),
       color: new ColorSorter(metaData),
-      cluster: new ClusterSorter(metaData, menuData.clusters.labels),
+      cluster: new ClusterSorter(metaData, clusterLabels),
       latent: new LatentSorter(metaData),
       dateXcolor: new DateColorSorter(metaData),
-      clusterXcluster: new ClusterClusterSorter(metaData, menuData.clusters.labels),
+      clusterXcluster: new ClusterClusterSorter(metaData, clusterLabels),
     };
 
     const menuEl = document.getElementById("sorter-menu");

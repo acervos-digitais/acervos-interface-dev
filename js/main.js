@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const mCanvas = new Canvas(metaData);
   const mAboutOverlay = new AboutOverlay();
-  const mDetailOverlay = new DetailOverlay(metaData, menuData);
+  const mDetailOverlay = new DetailOverlay(metaData);
   const mResultsOverlay = new ResultsOverlay(metaData);
   const mFilters = new FilterMenu(menuData);
-  const mSorters = new SorterMenu(metaData, menuData);
+  const mSorters = new SorterMenu(metaData, menuData.clusters.labels);
   const mExportMenu = new ExportMenu(mDetailOverlay.data);
 
   const allIdsSet = new Set(Object.values(menuData.collections).flat());
@@ -61,7 +61,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   document.addEventListener("show-detail", (evt) => {
-    mDetailOverlay.populateDetailOverlay(evt.detail.id, mFilters.objectFilter.selectedVals, mFilters.clusterFilter.selectedVals);
+    const selObjects = mFilters.objectFilter.selectedVals;
+    const selClusters = mFilters.clusterFilter.selectedVals;
+    const clusterLabels = menuData.clusters.labels;
+    mDetailOverlay.populateDetailOverlay(evt.detail.id, selObjects, selClusters, clusterLabels);
     detailOverlayEl.classList.remove("hidden");
   });
 

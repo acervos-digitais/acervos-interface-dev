@@ -5,22 +5,16 @@ class DetailOverlay extends Overlay {
   // static IMG_URL = "https://digitais.acervos.at.eu.org/imgs/herbario/arts/500";
   static IMG_URL = "https://acervos-digitais.github.io/herbario-media/imgs/arts/500";
 
-  constructor(metaData, menuData) {
+  constructor(metaData) {
     super("detail");
 
-    this.clusterLabels = menuData.clusters.labels;
-
     this.data = Object.values(metaData).map(x => {
-      const { id, color_palette, creator, museum, objects, title, url, year } = x;
-      return { id, color_palette, creator, museum, objects, title, url, year };
+      const { id, color_palette, creator, museum, objects, title, url, year, cluster } = x;
+      return { id, color_palette, creator, museum, objects, title, url, year, cluster };
     }).reduce((acc, v) => {
       acc[v.id] = v;
       return acc;
     }, {});
-
-    Object.keys(this.data).forEach(oid => {
-      this.data[oid].clusterId = menuData.clusters.ids.map(coids => coids.indexOf(oid)).findIndex(x => x > -1);
-    });
 
     this.loaderEl = document.getElementById("detail-overlay--loader");
     this.imgEl = document.getElementById("detail-overlay--image");
@@ -34,7 +28,7 @@ class DetailOverlay extends Overlay {
     this.aiTextEl = document.getElementById("detail-overlay--info--subtext");
   }
 
-  populateDetailOverlay(id, selObjects, selClusters) {
+  populateDetailOverlay(id, selObjects, selClusters, clusterLabels) {
     const data = this.data[id];
 
     const titleText = data.title == "" ? "untitled" : `${data.title}`;
@@ -82,8 +76,8 @@ class DetailOverlay extends Overlay {
     this.titleEl.innerHTML = `${getLabel(titleText)} (${getLabel(yearText)})<br>${getLabel(creatorText)}`;
     this.collectionEl.innerHTML = `${getLabel("collection")}: ${data.museum}`;
 
-    if (selClusters.length > 0 && selClusters.includes(data.clusterId)) {
-      this.clusterEl.innerHTML = `Cluster: ${this.clusterLabels[data.clusterId]}`;
+    if (selClusters.length > 0 && selClusters.includes(data.cluster.id)) {
+      this.clusterEl.innerHTML = `Cluster: ${clusterLabels[data.cluster.id]}`;
     }
 
     this.linkEl.innerHTML = `${getLabel("information")}`;

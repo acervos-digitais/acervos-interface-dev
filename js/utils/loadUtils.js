@@ -121,10 +121,10 @@ function createMenuData(metaData, clusterData) {
 
 function combineClusterData(metaData, clusterData) {
   const cClusterData = clusterData[CLUSTER.count][CLUSTER.dimRed];
-  for (const id of Object.keys(metaData)) {
-    metaData[id].cluster = {
-      idx: cClusterData.images[id].cluster,
-      distances: cClusterData.images[id].distances,
+  for (const oid of Object.keys(metaData)) {
+    metaData[oid].cluster = {
+      id: cClusterData.images[oid].cluster,
+      distances: cClusterData.images[oid].distances,
     }
   }
   return metaData;

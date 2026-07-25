@@ -6,13 +6,14 @@ import { ObjectFilter } from "./filters/ObjectFilter.js";
 
 class FilterMenu {
   constructor(menuData) {
+    this.clusterFilter = new ClusterFilter(menuData.clusters);
     this.objectFilter = new ObjectFilter(menuData.objects);
 
     this.allFilters = [
       new CollectionFilter(menuData.collections),
       new CategoryFilter(menuData.categories),
       new DateFilter(menuData.dates),
-      new ClusterFilter(menuData.clusters),
+      this.clusterFilter,
       this.objectFilter,
     ];
 

@@ -5,8 +5,10 @@ class DetailOverlay extends Overlay {
   // static IMG_URL = "https://digitais.acervos.at.eu.org/imgs/herbario/arts/500";
   static IMG_URL = "https://acervos-digitais.github.io/herbario-media/imgs/arts/500";
 
-  constructor(metaData) {
+  constructor(metaData, menuData) {
     super("detail");
+
+    this.clusterLabels = menuData.clusters.labels;
 
     this.data = Object.values(metaData).map(x => {
       const { id, color_palette, creator, museum, objects, title, url, year } = x;
@@ -16,6 +18,10 @@ class DetailOverlay extends Overlay {
       return acc;
     }, {});
 
+    Object.keys(this.data).forEach(oid => {
+      this.data[oid].clusterId = menuData.clusters.ids.map(coids => coids.indexOf(oid)).findIndex(x => x > -1);
+    });
+
     this.loaderEl = document.getElementById("detail-overlay--loader");
     this.imgEl = document.getElementById("detail-overlay--image");
     this.boxesEl = document.getElementById("detail-overlay--boxes");
@@ -23,11 +29,12 @@ class DetailOverlay extends Overlay {
 
     this.titleEl = document.getElementById("detail-overlay--title--text");
     this.collectionEl = document.getElementById("detail-overlay--collection--text");
+    this.clusterEl = document.getElementById("detail-overlay--cluster--text");
     this.linkEl = document.getElementById("detail-overlay--info--link");
     this.aiTextEl = document.getElementById("detail-overlay--info--subtext");
   }
 
-  populateDetailOverlay(id, objects) {
+  populateDetailOverlay(id, selObjects, selClusters) {
     const data = this.data[id];
 
     const titleText = data.title == "" ? "untitled" : `${data.title}`;
@@ -36,13 +43,14 @@ class DetailOverlay extends Overlay {
 
     this.boxesEl.innerHTML = "";
     this.colorsEl.innerHTML = "";
+    this.clusterEl.innerHTML = "";
 
     const drawBoxes = () => {
       this.boxesEl.style.width = `${this.imgEl.width}px`;
       this.boxesEl.style.height = `${this.imgEl.height}px`;
       this.aiTextEl.classList.add("hidden");
 
-      data.objects.filter(o => objects.includes(o.label)).forEach(({ box, label, score }) => {
+      data.objects.filter(o => selObjects.includes(o.label)).forEach(({ box, label, score }) => {
         const boxEl = document.createElement("div");
         boxEl.classList.add("overlay--boxes--box");
 
@@ -73,6 +81,11 @@ class DetailOverlay extends Overlay {
 
     this.titleEl.innerHTML = `${getLabel(titleText)} (${getLabel(yearText)})<br>${getLabel(creatorText)}`;
     this.collectionEl.innerHTML = `${getLabel("collection")}: ${data.museum}`;
+
+    if (selClusters.length > 0 && selClusters.includes(data.clusterId)) {
+      this.clusterEl.innerHTML = `Cluster: ${this.clusterLabels[data.clusterId]}`;
+    }
+
     this.linkEl.innerHTML = `${getLabel("information")}`;
     this.linkEl.setAttribute("href", data.url);
     this.linkEl.removeAttribute("download");

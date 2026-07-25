@@ -80,7 +80,7 @@ function createMenuData(metaData, clusterData) {
   }
 
   const lang = window.location.href.includes("en") ? "en" : "pt";
-  menuData.clusters.labels = cClusterData.clusters.descriptions.gemma3[lang].map(x => x.join(", "));
+  menuData.clusters.labels = cClusterData.clusters.descriptions.gemma3[lang].map(x => x.slice(0,1).join(", "));
   menuData.clusters.ids = new Array(CLUSTER.count).fill(null).map(() => []);
 
   for (const [id, { cluster, distances }] of Object.entries(cClusterData.images)) {

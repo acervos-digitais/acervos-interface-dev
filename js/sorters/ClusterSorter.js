@@ -9,7 +9,7 @@ class ClusterSorter extends Sorter {
     for (let idx = 0; idx < labels.length; idx++) {
       const opt = document.createElement("option");
       opt.value = idx;
-      opt.innerHTML = `${labels[idx].split(",")[0]}`;
+      opt.innerHTML = `${labels[idx]}`;
       this.picker.appendChild(opt);
     }
     this.picker.selectedIndex = 0

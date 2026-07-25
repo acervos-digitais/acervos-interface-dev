@@ -1,4 +1,4 @@
-import { getLabel } from "../label_strings.js";
+import { getLabel } from "../utils/stringLabelUtils.js";
 
 class Filter {
   constructor(data, slug) {

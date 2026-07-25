@@ -1,4 +1,4 @@
-import { getLabel } from "../label_strings.js";
+import { getLabel } from "../utils/stringLabelUtils.js";
 import { Overlay } from "./Overlay.js";
 
 class DetailOverlay extends Overlay {

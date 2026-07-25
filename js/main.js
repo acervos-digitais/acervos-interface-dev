@@ -1,4 +1,4 @@
-import { combineClusterData, createMenuData, fetchData } from "./load_utils.js";
+import { combineClusterData, createMenuData, fetchData } from "./utils/loadUtils.js";
 
 import { ExportMenu } from "./ExportMenu.js";
 import { FilterMenu } from "./FilterMenu.js";

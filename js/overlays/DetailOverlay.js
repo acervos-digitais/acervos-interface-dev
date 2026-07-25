@@ -1,3 +1,4 @@
+import { activationsToImage } from "../utils/colorUtils.js";
 import { getLabel } from "../utils/stringLabelUtils.js";
 import { Overlay } from "./Overlay.js";
 
@@ -5,8 +6,10 @@ class DetailOverlay extends Overlay {
   // static IMG_URL = "https://digitais.acervos.at.eu.org/imgs/herbario/arts/500";
   static IMG_URL = "https://acervos-digitais.github.io/herbario-media/imgs/arts/500";
 
-  constructor(metaData) {
+  constructor(metaData, clusterLabels) {
     super("detail");
+
+    this.clusterLabels = clusterLabels;
 
     this.data = Object.values(metaData).map(x => {
       const { id, color_palette, creator, museum, objects, title, url, year, cluster } = x;
@@ -16,9 +19,14 @@ class DetailOverlay extends Overlay {
       return acc;
     }, {});
 
+    this.activationImg = document.createElement("canvas");
+    this.activationImg.width = 16;
+    this.activationImg.height = 16;
+
     this.loaderEl = document.getElementById("detail-overlay--loader");
     this.imgEl = document.getElementById("detail-overlay--image");
     this.boxesEl = document.getElementById("detail-overlay--boxes");
+    this.heatCanvasEl = document.getElementById("detail-overlay--heatmap--canvas");
     this.colorsEl = document.getElementById("detail-overlay--colors");
 
     this.titleEl = document.getElementById("detail-overlay--title--text");
@@ -28,7 +36,7 @@ class DetailOverlay extends Overlay {
     this.aiTextEl = document.getElementById("detail-overlay--info--subtext");
   }
 
-  populateDetailOverlay(id, selObjects, selClusters, clusterLabels) {
+  populateDetailOverlay(id, selObjects, selClusters, activations) {
     const data = this.data[id];
 
     const titleText = data.title == "" ? "untitled" : `${data.title}`;
@@ -60,10 +68,34 @@ class DetailOverlay extends Overlay {
       });
       this.loaderEl.classList.add("hidden");
       this.imgEl.removeEventListener("load", drawBoxes);
-    }
+    };
+
+    const drawHeat = () => {
+      if (selClusters.length < 1) {
+        this.heatCanvasEl.parentElement.classList.add("hidden");
+        return;
+      }
+      this.heatCanvasEl.parentElement.classList.remove("hidden");
+
+      const actImgCtx = this.activationImg.getContext("2d");
+      actImgCtx.putImageData(activationsToImage(activations), 0, 0);
+
+      this.heatCanvasEl.width = this.imgEl.width;
+      this.heatCanvasEl.height = this.imgEl.height;
+      const heatImgCtx = this.heatCanvasEl.getContext("2d");
+
+      heatImgCtx.imageSmoothingEnabled = true;
+      heatImgCtx.imageSmoothingQuality = "high";
+
+      heatImgCtx.drawImage(this.activationImg, 0, 0, this.heatCanvasEl.width, this.heatCanvasEl.height);
+
+      this.loaderEl.classList.add("hidden");
+      this.imgEl.removeEventListener("load", drawHeat);
+    };
 
     this.loaderEl.classList.remove("hidden");
     this.imgEl.addEventListener("load", drawBoxes);
+    // this.imgEl.addEventListener("load", drawHeat);
     this.imgEl.src = `${DetailOverlay.IMG_URL}/${data.id}.jpg`;
 
     data.color_palette.forEach(([r, g, b]) => {
@@ -77,7 +109,7 @@ class DetailOverlay extends Overlay {
     this.collectionEl.innerHTML = `${getLabel("collection")}: ${data.museum}`;
 
     if (selClusters.length > 0 && selClusters.includes(data.cluster.id)) {
-      this.clusterEl.innerHTML = `Cluster: ${clusterLabels[data.cluster.id]}`;
+      this.clusterEl.innerHTML = `Cluster: ${this.clusterLabels[data.cluster.id]}`;
     }
 
     this.linkEl.innerHTML = `${getLabel("information")}`;

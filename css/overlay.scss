@@ -99,6 +99,19 @@
           text-shadow: -1px -1px 0 var(--txt-color-hl), 1px -1px 0 var(--txt-color-hl), -1px 1px 0 var(--txt-color-hl), 1px 1px 0 var(--txt-color-hl);;
         }
       }
+
+      .overlay--heatmap {
+        position: absolute;
+        top: 0;
+
+        .overlay--heatmap--canvas {
+          opacity: 0.85;
+        }
+
+        &.hidden {
+          display: none;
+        }
+      }
     }
 
     .overlay--list--wrapper {

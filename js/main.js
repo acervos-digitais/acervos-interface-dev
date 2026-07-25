@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const mCanvas = new Canvas(metaData);
   const mAboutOverlay = new AboutOverlay();
-  const mDetailOverlay = new DetailOverlay(metaData);
+  const mDetailOverlay = new DetailOverlay(metaData, menuData.clusters.labels);
   const mResultsOverlay = new ResultsOverlay(metaData);
   const mFilters = new FilterMenu(menuData);
   const mSorters = new SorterMenu(metaData, menuData.clusters.labels);
@@ -63,8 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.addEventListener("show-detail", (evt) => {
     const selObjects = mFilters.objectFilter.selectedVals;
     const selClusters = mFilters.clusterFilter.selectedVals;
-    const clusterLabels = menuData.clusters.labels;
-    mDetailOverlay.populateDetailOverlay(evt.detail.id, selObjects, selClusters, clusterLabels);
+    mDetailOverlay.populateDetailOverlay(evt.detail.id, selObjects, selClusters);
     detailOverlayEl.classList.remove("hidden");
   });
 

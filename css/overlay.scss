@@ -161,6 +161,13 @@
 
       .overlay--info--text {
         font-size: 1rem;
+        &.clickable {
+          user-select: none;
+          cursor: pointer;
+          &.active {
+            text-decoration: underline;
+          }
+        }
       }
 
       .overlay--info--link-section {

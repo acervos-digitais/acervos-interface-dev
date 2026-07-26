@@ -28,12 +28,12 @@ function activationsToImage(activations2D) {
 
   activations.forEach((act, px) => {
     const cidx = px * 4;
-    const colorInt = interpolateInferno(act);
+    // const colorInt = interpolateInferno(act);
 
-    data[cidx + 0] = (colorInt >> 16) & 255;
-    data[cidx + 1] = (colorInt >>  8) & 255;
-    data[cidx + 2] = (colorInt >>  0) & 255;
-    data[cidx + 3] = 255;  //(act > 0.03) ? 255 : 0;
+    data[cidx + 0] = 0; // (colorInt >> 16) & 255;
+    data[cidx + 1] = 0; // (colorInt >>  8) & 255;
+    data[cidx + 2] = 0; // (colorInt >>  0) & 255;
+    data[cidx + 3] = (act > 0.75) ? 0 : (act > 0.5) ? 85 : 255;
   });
   return new ImageData(data, width, height);
 }

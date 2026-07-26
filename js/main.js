@@ -11,17 +11,21 @@ import { ResultsOverlay } from "./overlays/ResultsOverlay.js";
 
 const META_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20250705_processed.json";
 const CLUSTER_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20260722_clusters.json";
+const ACTIVATION_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20260722_activations.json";
 
 const metaDataP = fetchData(META_DATA_URL);
 const clusterDataP = fetchData(CLUSTER_DATA_URL);
+const activationDataP = fetchData(ACTIVATION_DATA_URL);
 
 let metaData = null;
 let clusterData = null;
+let activationData = null;
 let menuData = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
   metaData = await metaDataP;
   clusterData = await clusterDataP;
+  activationData = await activationDataP;
   menuData = createMenuData(metaData, clusterData);
   metaData = combineClusterData(metaData, clusterData);
 
@@ -63,7 +67,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.addEventListener("show-detail", (evt) => {
     const selObjects = mFilters.objectFilter.selectedVals;
     const selClusters = mFilters.clusterFilter.selectedVals;
-    mDetailOverlay.populateDetailOverlay(evt.detail.id, selObjects, selClusters);
+    const selActivations = activationData[evt.detail.id];
+    mDetailOverlay.populateDetailOverlay(evt.detail.id, selObjects, selClusters, selActivations);
     detailOverlayEl.classList.remove("hidden");
   });
 

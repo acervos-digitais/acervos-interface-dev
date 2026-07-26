@@ -34,6 +34,16 @@ class DetailOverlay extends Overlay {
     this.clusterEl = document.getElementById("detail-overlay--cluster--text");
     this.linkEl = document.getElementById("detail-overlay--info--link");
     this.aiTextEl = document.getElementById("detail-overlay--info--subtext");
+
+    const clusterClicked = () => {
+      this.clusterEl.classList.toggle("active");
+      if (this.clusterEl.classList.contains("active")) {
+        this.heatCanvasEl.parentElement.classList.remove("hidden");
+      } else {
+        this.heatCanvasEl.parentElement.classList.add("hidden");
+      }
+    }
+    this.clusterEl.addEventListener("click", clusterClicked);
   }
 
   populateDetailOverlay(id, selObjects, selClusters, activations) {
@@ -46,6 +56,9 @@ class DetailOverlay extends Overlay {
     this.boxesEl.innerHTML = "";
     this.colorsEl.innerHTML = "";
     this.clusterEl.innerHTML = "";
+
+    this.heatCanvasEl.parentElement.classList.add("hidden");
+    this.clusterEl.classList.remove("active");
 
     const drawBoxes = () => {
       this.boxesEl.style.width = `${this.imgEl.width}px`;
@@ -71,18 +84,13 @@ class DetailOverlay extends Overlay {
     };
 
     const drawHeat = () => {
-      if (selClusters.length < 1) {
-        this.heatCanvasEl.parentElement.classList.add("hidden");
-        return;
-      }
-      this.heatCanvasEl.parentElement.classList.remove("hidden");
-
       const actImgCtx = this.activationImg.getContext("2d");
       actImgCtx.putImageData(activationsToImage(activations), 0, 0);
 
       this.heatCanvasEl.width = this.imgEl.width;
       this.heatCanvasEl.height = this.imgEl.height;
       const heatImgCtx = this.heatCanvasEl.getContext("2d");
+      heatImgCtx.clearRect(0, 0, this.heatCanvasEl.width, this.heatCanvasEl.height);
 
       heatImgCtx.imageSmoothingEnabled = true;
       heatImgCtx.imageSmoothingQuality = "high";
@@ -95,7 +103,7 @@ class DetailOverlay extends Overlay {
 
     this.loaderEl.classList.remove("hidden");
     this.imgEl.addEventListener("load", drawBoxes);
-    // this.imgEl.addEventListener("load", drawHeat);
+    this.imgEl.addEventListener("load", drawHeat);
     this.imgEl.src = `${DetailOverlay.IMG_URL}/${data.id}.jpg`;
 
     data.color_palette.forEach(([r, g, b]) => {

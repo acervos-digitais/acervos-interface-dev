@@ -9,7 +9,7 @@ import { AboutOverlay } from "./overlays/AboutOverlay.js";
 import { DetailOverlay } from "./overlays/DetailOverlay.js";
 import { ResultsOverlay } from "./overlays/ResultsOverlay.js";
 
-const META_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20250705_processed.json";
+const META_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20260801_processed.json";
 const CLUSTER_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20260801_clusters.json";
 const ACTIVATION_DATA_URL = "https://raw.githubusercontent.com/acervos-digitais/herbario-data/main/json/20260801_activations.json";
 

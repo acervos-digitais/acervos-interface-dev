@@ -3,7 +3,7 @@ import { getLabel } from "../utils/stringLabelUtils.js";
 import { Overlay } from "./Overlay.js";
 
 class DetailOverlay extends Overlay {
-  // static IMG_URL = "https://digitais.acervos.at.eu.org/imgs/herbario/arts/500";
+  // static IMG_URL = "https://197.acervos.at.eu.org/imgs/herbario/arts/500";
   static IMG_URL = "https://acervos-digitais.github.io/herbario-media/imgs/arts/500";
 
   constructor(metaData, clusterLabels) {

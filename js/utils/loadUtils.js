@@ -3,6 +3,7 @@ const OBJ_THOLDS = {
   dog: 0,
   horse: 0,
   ox: 0,
+  fish: 1,
   "painting of human": 0,
   bush: 0,
   flower: 0,
@@ -16,6 +17,7 @@ const OBJ_THOLDS = {
   "palm tree": 0,
   "human face": 0,
   "human hand": 0,
+  "human foot": 0,
   "naked human back": 0,
   "naked human breast": 1,
   "naked human buttocks": 1,
@@ -28,7 +30,7 @@ const CLUSTER = {
 };
 
 const OBJECTS = {
-  model: "owlv2",
+  model: "all",
 }
 
 async function fetchData(mUrl) {

@@ -129,7 +129,7 @@ class DetailOverlay extends Overlay {
     this.loaderEl.classList.remove("hidden");
     this.aiTextEl.classList.add("hidden");
     this.imgEl.src = "";
-    [this.boxesEl, this.colorsEl, this.titleEl, this.collectionEl, this.linkEl].forEach(el => el.innerHTML = "");
+    [this.boxesEl, this.colorsEl, this.titleEl, this.collectionEl, this.clusterEl, this.linkEl].forEach(el => el.innerHTML = "");
   }
 
   populateMosaicOverlay(imgUrl, isAi) {

@@ -59,11 +59,11 @@ class DetailOverlay extends Overlay {
 
     this.heatCanvasEl.parentElement.classList.add("hidden");
     this.clusterEl.classList.remove("active");
+    this.aiTextEl.classList.remove("hidden");
 
     const drawBoxes = () => {
       this.boxesEl.style.width = `${this.imgEl.width}px`;
       this.boxesEl.style.height = `${this.imgEl.height}px`;
-      this.aiTextEl.classList.add("hidden");
 
       data.objects.filter(o => selObjects.includes(o.label)).forEach(({ box, label, score }) => {
         const boxEl = document.createElement("div");
@@ -77,7 +77,6 @@ class DetailOverlay extends Overlay {
         // boxEl.innerHTML = `${label}: ${score}`;
 
         this.boxesEl.appendChild(boxEl);
-        this.aiTextEl.classList.remove("hidden");
       });
       this.loaderEl.classList.add("hidden");
       this.imgEl.removeEventListener("load", drawBoxes);
